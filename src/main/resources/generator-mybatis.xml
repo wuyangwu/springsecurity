@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--        引入外部的properties文件用${}引用即可  yml的文件引用比较复杂需要更新xml文件的外部包-->
+    <!--    <properties resource="application.yml"></properties>-->
+
+    <!--mysql 连接数据库jar 这里选择自己本地位置-->
+    <classPathEntry location="H:/apache-factory/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar" />
+
+    <context id="default" targetRuntime="MyBatis3">
+
+        <!--        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
+
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- 这里的type里写的是你的实现类的类全类名,注：如果不配置type属性,则会使用默认的CommentGenerator实现类DefaultCommentGenerator -->
+        <commentGenerator type = "com.example.wy.config.mybatisgeneroter.MybatisCommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <!--            <property name="suppressAllComments" value="true" />-->
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/chapter05?useSSL=false" userId="root" password="root">
+        </jdbcConnection>
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+        NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.example.wy.entity" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置
+        如果maven工程只是单独的一个工程，targetProject="src/main/java"
+        若果maven工程是分模块的工程，targetProject="所属模块的名称"，例如：
+        targetProject="ecps-manager-mapper"，下同-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.wy.mapper" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+<!--        <table tableName="user"-->
+<!--               enableInsert="true"-->
+<!--               enableDeleteByPrimaryKey="true"-->
+<!--               enableSelectByPrimaryKey="true"-->
+<!--               enableUpdateByPrimaryKey="true"-->
+<!--               enableCountByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               enableUpdateByExample="false">-->
+
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="user_role"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!--        <table schema="" tableName="success_killed"></table>-->
+    </context>
+</generatorConfiguration>

@@ -23,6 +23,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MenuService menuService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        User user = userMapper.loadUserByUsername(username);
@@ -33,8 +36,11 @@ public class UserService implements UserDetailsService {
         Users users = new Users();
        users.setEnabled(user.getEnabled());
        users.setId(user.getId());
+       users.setUsername(username);
+       // 这个里面又判断密码的
        users.setPassword(user.getPassword());
        users.setLocked(user.getLocked());
+       users.setMenus(menuService.getRolerorMenu(username));
        users.setRoles(userMapper.getUserRolesByUid(user.getId()));
        return users;
 //       return user;

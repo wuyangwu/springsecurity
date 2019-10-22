@@ -1,5 +1,7 @@
 package com.example.wy.entity;
 
+import com.alibaba.fastjson.JSONArray;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +18,12 @@ import java.util.List;
 public class Users implements UserDetails {
     private Integer id;
     private String username;
+    @JsonIgnore
     private String password;
     private Boolean enabled;
     private Boolean locked;
     private List<Role> roles;
+    private JSONArray menus;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //获取用户权限
@@ -98,5 +102,13 @@ public class Users implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public JSONArray getMenus() {
+        return menus;
+    }
+
+    public void setMenus(JSONArray menus) {
+        this.menus = menus;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.wy.web.controller;
+package com.example.wy.web.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;

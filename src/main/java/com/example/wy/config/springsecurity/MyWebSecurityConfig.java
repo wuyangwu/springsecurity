@@ -44,21 +44,21 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-//        return new BCryptPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.userDetailsService(userService);
-        auth.inMemoryAuthentication()
-                .withUser("root").password("123").roles("ADMIN", "DBA")
-                .and()
-                .withUser("admin").password("123").roles("ADMIN","USER")
-                .and()
-                .withUser("sang").password("123").roles("USER");
+        auth.userDetailsService(userService);
+//        auth.inMemoryAuthentication()
+//                .withUser("root").password("123").roles("ADMIN", "DBA")
+//                .and()
+//                .withUser("admin").password("123").roles("ADMIN","USER")
+//                .and()
+//                .withUser("sang").password("123").roles("USER");
     }
 
     @Override
